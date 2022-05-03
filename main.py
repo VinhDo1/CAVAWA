@@ -87,19 +87,19 @@ class Game:
         self.anyaVoiceLines = [pygame.mixer.Sound('sounds/Sherry/Greeting.wav'),
                             pygame.mixer.Sound('sounds/Sherry/MomLovesKnives.wav'),
                             pygame.mixer.Sound('sounds/Sherry/SpySpySpy.wav')]     
-        # self.charlesVoiceLines = [pygame.mixer.Sound('sounds/voice1.wav'),
-        #                     pygame.mixer.Sound('sounds/voice2.wav'),
-        #                     pygame.mixer.Sound('sounds/fakevoice1.wav')]  
-        # self.fenroarVoiceLines = [pygame.mixer.Sound('sounds/voice1.wav'),
-        #                     pygame.mixer.Sound('sounds/voice2.wav'),
-        #                     pygame.mixer.Sound('sounds/fakevoice1.wav')]            
-        # self.dogVoiceLines = [pygame.mixer.Sound('sounds/voice1.wav'),
-        #                     pygame.mixer.Sound('sounds/voice2.wav'),
-        #                     pygame.mixer.Sound('sounds/fakevoice1.wav')]                
+        self.charlesVoiceLines = [pygame.mixer.Sound('sounds/Nikolaj/DannyShenwardWilli.wav'),
+                            pygame.mixer.Sound('sounds/Nikolaj/DoovidVinh.wav'),
+                            pygame.mixer.Sound('sounds/Nikolaj/LeoUpi.wav')]  
+        self.fenroarVoiceLines = [pygame.mixer.Sound('sounds/Pew/AlanAndrewDanny.wav'),
+                            pygame.mixer.Sound('sounds/Pew/DchenDoovidLeo.wav'),
+                            pygame.mixer.Sound('sounds/Pew/RichardShenwardSherry.wav'),
+                            pygame.mixer.Sound('sounds/Pew/UpiWilliVinh.wav')]            
+        self.dogVoiceLines = [pygame.mixer.Sound('sounds/Dog/LeoUpi.wav'),
+                            pygame.mixer.Sound('sounds/Dog/ShenwardVinh.wav'),
+                            pygame.mixer.Sound('sounds/Dog/DchenDoovidDanny.wav')]                
         self.isakVoiceLines = [pygame.mixer.Sound('sounds/Vinh/Greeting.wav'),
                             pygame.mixer.Sound('sounds/Vinh/EzrealBrokeUp.wav'),
-                            pygame.mixer.Sound('sounds/Vinh/SuddenlyHot.wav'),
-                            ]
+                            pygame.mixer.Sound('sounds/Vinh/SuddenlyHot.wav')]
         self.ekkoVoiceLines = [pygame.mixer.Sound('sounds/Danny/HiVi.wav'),
                             pygame.mixer.Sound('sounds/Danny/ThankYouVi.wav'),
                             pygame.mixer.Sound('sounds/Danny/ICantBelieve.wav'),
@@ -178,7 +178,6 @@ class Game:
                     Ezreal(self, x, y)
                 else:
                     Ground(self, x, y, 'grass')
-
 
     def new(self):
         # a new game starts
@@ -274,11 +273,17 @@ class Game:
                         if self.anyaVoiceCount > len(self.anyaVoiceLines) - 1:
                             self.anyaVoiceCount = 0  
                     elif self.atCharles:
-                        pass
+                        randVoiceLine = random.randint(0, len(self.charlesVoiceLines)-1)
+                        self.charlesVoiceLines[randVoiceLine].play()    
+                        self.atCharles = False
                     elif self.atFenroar:
-                        pass
+                        randVoiceLine = random.randint(0, len(self.fenroarVoiceLines)-1)
+                        self.fenroarVoiceLines[randVoiceLine].play()    
+                        self.atFenroar = False
                     elif self.atDog:
-                        pass
+                        randVoiceLine = random.randint(0, len(self.dogVoiceLines)-1)
+                        self.dogVoiceLines[randVoiceLine].play()    
+                        self.atDog = False
                     elif self.atIsak:
                         self.isakVoiceLines[self.isakVoiceCount].play()    
                         self.atIsak = False
@@ -418,7 +423,7 @@ class Game:
         button = False
 
         timerEvent = pygame.USEREVENT + 1
-        pygame.time.set_timer(timerEvent, 61000)
+        pygame.time.set_timer(timerEvent, 62400)
 
         continueButton = Button(WIN_WIDTH/2 - 70, WIN_HEIGHT / 2 - 60, 140, 50, WHITE, GIRAFFE_GREEN, 'Continue', 32)
 
