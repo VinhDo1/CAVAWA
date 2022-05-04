@@ -676,12 +676,12 @@ class Button:
 
 class Attack(pygame.sprite.Sprite):
     pygame.mixer.init()
-    killedEnemyVoiceLines = [pygame.mixer.Sound('sounds/scaryterry.wav'),
-                            pygame.mixer.Sound('sounds/Leo/Mald.wav'),
+    killedEnemyVoiceLines = [pygame.mixer.Sound('sounds/Alan/IHaveAQuestion.wav'),
                             pygame.mixer.Sound('sounds/Alan/Mad.wav'),
-                            pygame.mixer.Sound('sounds/Alan/IHaveAQuestion.wav'),
+                            pygame.mixer.Sound('sounds/Leo/Mald.wav'),
                             pygame.mixer.Sound('sounds/Willi/Tooki1.wav'),
-                            pygame.mixer.Sound('sounds/Willi/Tooki2.wav')]
+                            pygame.mixer.Sound('sounds/Willi/Tooki2.wav'),
+                            pygame.mixer.Sound('sounds/scaryterry.wav')]
 
     def __init__(self, game, x, y):
         self.game = game
@@ -733,7 +733,10 @@ class Attack(pygame.sprite.Sprite):
         hits = pygame.sprite.spritecollide(self, self.game.enemies, True)
         if hits:
             voiceLine = random.randint(0, len(self.killedEnemyVoiceLines)-1)
+            while voiceLine == self.game.previousEnemyLine:
+                voiceLine = random.randint(0, len(self.killedEnemyVoiceLines)-1)
             self.killedEnemyVoiceLines[voiceLine].play()    
+            self.game.previousEnemyLine = voiceLine
     
     def animate(self):
         direction = self.game.player.facing

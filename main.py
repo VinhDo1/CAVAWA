@@ -58,7 +58,7 @@ class Game:
         self.terrainSpritesheet2 = Spritesheet('img/tiles2.png')
         self.introBackground = pygame.image.load('img/intro.png')
         self.goBackground = pygame.image.load('img/smallbadending.jpg')
-        self.ceremonyBackground = pygame.image.load('img/ceremony.png')
+        self.ceremonyBackground = pygame.image.load('img/ceremony2.png')
         self.creditsBackground = pygame.image.load('img/credits.png')
 
         self.goSound = pygame.mixer.Sound('sounds/PaperMarioGO.wav') 
@@ -98,6 +98,8 @@ class Game:
                             pygame.mixer.Sound('sounds/Dog/ShenwardVinh.wav'),
                             pygame.mixer.Sound('sounds/Dog/DchenDoovidDanny.wav')]                
         self.isakVoiceLines = [pygame.mixer.Sound('sounds/Vinh/Greeting.wav'),
+                            pygame.mixer.Sound('sounds/Vinh/GodTongue.wav'),
+                            pygame.mixer.Sound('sounds/Vinh/YouLovePizza.wav'),
                             pygame.mixer.Sound('sounds/Vinh/EzrealBrokeUp.wav'),
                             pygame.mixer.Sound('sounds/Vinh/SuddenlyHot.wav')]
         self.ekkoVoiceLines = [pygame.mixer.Sound('sounds/Danny/HiVi.wav'),
@@ -113,11 +115,12 @@ class Game:
         self.fanficVoiceCount = 0
         self.witchVoiceCount = 0
         self.witch2VoiceCount = 0
+        self.previousEnemyLine = 0
         self.caitVoiceCount = 0
         self.anyaVoiceCount = 0
-        self.charlesVoiceCount = 0
-        self.fenroarVoiceCount = 0
-        self.dogVoiceCount = 0
+        self.previousChar = 0
+        self.previousFenroar = 0
+        self.previousDog = 0
         self.isakVoiceCount = 0
         self.ekkoVoiceCount = 0
         self.ezrealVoiceCount = 0
@@ -274,15 +277,24 @@ class Game:
                             self.anyaVoiceCount = 0  
                     elif self.atCharles:
                         randVoiceLine = random.randint(0, len(self.charlesVoiceLines)-1)
+                        while randVoiceLine == self.previousChar:
+                            randVoiceLine = random.randint(0, len(self.charlesVoiceLines)-1)
                         self.charlesVoiceLines[randVoiceLine].play()    
+                        self.previousChar = randVoiceLine
                         self.atCharles = False
                     elif self.atFenroar:
                         randVoiceLine = random.randint(0, len(self.fenroarVoiceLines)-1)
-                        self.fenroarVoiceLines[randVoiceLine].play()    
+                        while randVoiceLine == self.previousFenroar:
+                            randVoiceLine = random.randint(0, len(self.fenroarVoiceLines)-1)
+                        self.fenroarVoiceLines[randVoiceLine].play()  
+                        self.previousFenroar = randVoiceLine  
                         self.atFenroar = False
                     elif self.atDog:
                         randVoiceLine = random.randint(0, len(self.dogVoiceLines)-1)
+                        while randVoiceLine == self.previousDog:
+                            randVoiceLine = random.randint(0, len(self.dogVoiceLines)-1)
                         self.dogVoiceLines[randVoiceLine].play()    
+                        self.previousDog = randVoiceLine
                         self.atDog = False
                     elif self.atIsak:
                         self.isakVoiceLines[self.isakVoiceCount].play()    
