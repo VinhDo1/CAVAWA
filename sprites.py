@@ -321,9 +321,9 @@ class Dog(Npc):
     def collidePlayer(self):
         hits = pygame.sprite.spritecollide(self, self.game.players, False)
         if hits:
-            self.game.atFenroar = True
+            self.game.atDog = True
         else:
-            self.game.atFenroar = False 
+            self.game.atDog = False 
 
     def animate(self):
         self.image = self.animations[math.floor(self.animationLoop)]
