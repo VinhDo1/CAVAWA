@@ -438,8 +438,8 @@ class Game:
         button = False
 
         timerEvent = pygame.USEREVENT + 1
-        # pygame.time.set_timer(timerEvent, 62000)
-        pygame.time.set_timer(timerEvent, 1)
+        pygame.time.set_timer(timerEvent, 62000)
+        # pygame.time.set_timer(timerEvent, 1)
 
         continueButton = Button(WIN_WIDTH/2 - 70, WIN_HEIGHT / 2 - 60, 140, 50, WHITE, GIRAFFE_GREEN, 'Continue', 32)
 
