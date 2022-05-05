@@ -735,7 +735,7 @@ class Attack(pygame.sprite.Sprite):
             voiceLine = random.randint(0, len(self.killedEnemyVoiceLines)-1)
             while voiceLine == self.game.previousEnemyLine:
                 voiceLine = random.randint(0, len(self.killedEnemyVoiceLines)-1)
-            self.killedEnemyVoiceLines[voiceLine].play()    
+            self.game.channel1.play(self.killedEnemyVoiceLines[voiceLine])
             self.game.previousEnemyLine = voiceLine
     
     def animate(self):

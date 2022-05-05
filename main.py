@@ -61,6 +61,9 @@ class Game:
         self.ceremonyBackground = pygame.image.load('img/ceremony2.png')
         self.creditsBackground = pygame.image.load('img/credits.png')
 
+        self.channel = pygame.mixer.Channel(0)
+        self.channel1 = pygame.mixer.Channel(1)
+
         self.goSound = pygame.mixer.Sound('sounds/PaperMarioGO.wav') 
         self.ceremonySound = pygame.mixer.Sound('sounds/Ceremony.wav')   
 
@@ -218,59 +221,59 @@ class Game:
                     self.camera = not self.camera
                 if event.key == pygame.K_g:
                     if self.atBrim:
-                        self.brimVoiceLines[self.brimVoiceCount].play()    
+                        self.channel.play(self.brimVoiceLines[self.brimVoiceCount])
                         self.atBrim = False
                         self.brimVoiceCount += 1
                         if self.brimVoiceCount > len(self.brimVoiceLines) - 1:
                             self.brimVoiceCount = 0 
                     elif self.atF0:
-                        self.fanficVoiceLines[self.fanficVoiceCount].play()
+                        self.channel.play(self.fanficVoiceLines[self.fanficVoiceCount])
                         self.killF0 = True    
                         self.atF0 = False
                         self.fanficVoiceCount += 1
                         if self.fanficVoiceCount > len(self.fanficVoiceLines) - 1:
                             self.fanficVoiceCount = 0     
                     elif self.atF1:
-                        self.fanficVoiceLines[self.fanficVoiceCount].play()
+                        self.channel.play(self.fanficVoiceLines[self.fanficVoiceCount])
                         self.killF1 = True    
                         self.atF1 = False
                         self.fanficVoiceCount += 1
                         if self.fanficVoiceCount > len(self.fanficVoiceLines) - 1:
                             self.fanficVoiceCount = 0  
                     elif self.atF2:
-                        self.fanficVoiceLines[self.fanficVoiceCount].play()
+                        self.channel.play(self.fanficVoiceLines[self.fanficVoiceCount])
                         self.killF2 = True    
                         self.atF2 = False
                         self.fanficVoiceCount += 1
                         if self.fanficVoiceCount > len(self.fanficVoiceLines) - 1:
                             self.fanficVoiceCount = 0  
                     elif self.atF3:
-                        self.fanficVoiceLines[self.fanficVoiceCount].play()
+                        self.channel.play(self.fanficVoiceLines[self.fanficVoiceCount])
                         self.killF3 = True    
                         self.atF3 = False
                         self.fanficVoiceCount += 1
                         if self.fanficVoiceCount > len(self.fanficVoiceLines) - 1:
                             self.fanficVoiceCount = 0                                
                     elif self.atWitch:
-                        self.witchVoiceLines[self.witchVoiceCount].play()    
+                        self.channel.play(self.witchVoiceLines[self.witchVoiceCount])
                         self.atWitch = False
                         self.witchVoiceCount += 1
                         if self.witchVoiceCount > len(self.witchVoiceLines) - 1:
                             self.witchVoiceCount = 0
                     elif self.atWitch2:
-                        self.witch2VoiceLines[self.witch2VoiceCount].play()    
+                        self.channel.play(self.witch2VoiceLines[self.witch2VoiceCount])
                         self.atWitch2 = False
                         self.witch2VoiceCount += 1
                         if self.witch2VoiceCount > len(self.witch2VoiceLines) - 1:
                             self.witch2VoiceCount = 0                    
                     elif self.atCait:
-                        self.caitVoiceLines[self.caitVoiceCount].play()    
+                        self.channel.play(self.caitVoiceLines[self.caitVoiceCount])
                         self.atCait = False
                         self.caitVoiceCount += 1
                         if self.caitVoiceCount > len(self.caitVoiceLines) - 1:
                             self.caitVoiceCount = 0  
                     elif self.atAnya:
-                        self.anyaVoiceLines[self.anyaVoiceCount].play()    
+                        self.channel.play(self.anyaVoiceLines[self.anyaVoiceCount])
                         self.atAnya = False
                         self.anyaVoiceCount += 1
                         if self.anyaVoiceCount > len(self.anyaVoiceLines) - 1:
@@ -279,43 +282,43 @@ class Game:
                         randVoiceLine = random.randint(0, len(self.charlesVoiceLines)-1)
                         while randVoiceLine == self.previousChar:
                             randVoiceLine = random.randint(0, len(self.charlesVoiceLines)-1)
-                        self.charlesVoiceLines[randVoiceLine].play()    
+                        self.channel.play(self.charlesVoiceLines[randVoiceLine])
                         self.previousChar = randVoiceLine
                         self.atCharles = False
                     elif self.atFenroar:
                         randVoiceLine = random.randint(0, len(self.fenroarVoiceLines)-1)
                         while randVoiceLine == self.previousFenroar:
                             randVoiceLine = random.randint(0, len(self.fenroarVoiceLines)-1)
-                        self.fenroarVoiceLines[randVoiceLine].play()  
+                        self.channel.play(self.fenroarVoiceLines[randVoiceLine])
                         self.previousFenroar = randVoiceLine  
                         self.atFenroar = False
                     elif self.atDog:
                         randVoiceLine = random.randint(0, len(self.dogVoiceLines)-1)
                         while randVoiceLine == self.previousDog:
                             randVoiceLine = random.randint(0, len(self.dogVoiceLines)-1)
-                        self.dogVoiceLines[randVoiceLine].play()    
+                        self.channel.play(self.dogVoiceLines[randVoiceLine])
                         self.previousDog = randVoiceLine
                         self.atDog = False
                     elif self.atIsak:
-                        self.isakVoiceLines[self.isakVoiceCount].play()    
+                        self.channel.play(self.isakVoiceLines[self.isakVoiceCount])
                         self.atIsak = False
                         self.isakVoiceCount += 1
                         if self.isakVoiceCount > len(self.isakVoiceLines) - 1:
                             self.isakVoiceCount = 0 
                     elif self.atEkko:                        
-                        self.ekkoVoiceLines[self.ekkoVoiceCount].play()    
+                        self.channel.play(self.ekkoVoiceLines[self.ekkoVoiceCount])
                         self.atEkko = False
                         self.ekkoVoiceCount += 1
                         if self.ekkoVoiceCount > len(self.ekkoVoiceLines) - 1:
                             self.ekkoVoiceCount = 0 
                     elif self.atEzreal:
-                        self.ezrealVoiceLines[self.ezrealVoiceCount].play()    
+                        self.channel.play(self.ezrealVoiceLines[self.ezrealVoiceCount])
                         self.atEzreal = False
                         self.ezrealVoiceCount += 1
                         if self.ezrealVoiceCount > len(self.ezrealVoiceLines) - 1:
                             self.ezrealVoiceCount = 0 
                 if self.atFlower and event.key == pygame.K_F5:
-                    self.ceremonySound.play()
+                    self.channel.play(self.ceremonySound)
                     self.finished = True
                     self.playing = False
                     self.atFlower = False                
@@ -435,7 +438,8 @@ class Game:
         button = False
 
         timerEvent = pygame.USEREVENT + 1
-        pygame.time.set_timer(timerEvent, 62000)
+        # pygame.time.set_timer(timerEvent, 62000)
+        pygame.time.set_timer(timerEvent, 1)
 
         continueButton = Button(WIN_WIDTH/2 - 70, WIN_HEIGHT / 2 - 60, 140, 50, WHITE, GIRAFFE_GREEN, 'Continue', 32)
 
@@ -469,6 +473,9 @@ class Game:
                 self.credits()
 
     def credits(self):
+        text = self.font.render('You did it!', True, WHITE)
+        textRect = text.get_rect(center=(WIN_WIDTH/2, WIN_HEIGHT/(4*3)))
+
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -480,6 +487,7 @@ class Game:
             keys = pygame.key.get_pressed()
             
             self.screen.blit(self.creditsBackground, (0,0))
+            self.screen.blit(text, textRect)
             self.clock.tick(FPS)
             pygame.display.update()        
 
